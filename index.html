@@ -3,10 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello World</title>
+  <title>KÁROJ'S GREATEST ADVENTURE</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hello World</h1>
+  <main class="game">
+    <h1>KÁROJ'S GREATEST ADVENTURE</h1>
+    <p id="story">
+      Te vagy Károj. Egy erdőben ácsorogsz. Kicsit unatkozol, ezért elindulsz kalandozni. Mit teszel?
+    </p>
+
+    <div id="choices" class="choices">
+      <button type="button" data-choice="1">1. Túrázok a hegyekben.</button>
+      <button type="button" data-choice="2">2. Felmászok egy hegyre.</button>
+      <button type="button" data-choice="3">3. Elmegyek síelni.</button>
+    </div>
+
+    <section id="ending" class="ending hidden" aria-live="polite">
+      <p id="ending-text"></p>
+      <p class="win">GRATULÁLOK! Végigvitted a játékot!</p>
+      <a href="index.html">Új játék</a>
+    </section>
+  </main>
+
+  <script>
+    const endings = {
+      "1": "A hegyekben rövid barangolás után megesz egy grizzly medve, de előtte még nagyon sok finom epret sikerül szedned!",
+      "2": "Mivel menet közben rájössz, hogy tériszonyod van, ezért inkább hazamész videojátékozni. Ez aztán nem semmi kaland volt!",
+      "3": "Elutazol egy közeli sítáborba, ám ott rájössz, hogy a síelés buzis, ezért inkább hazamész. Egy férfi a hóban is férfi! (?)"
+    };
+
+    const choices = document.getElementById("choices");
+    const endingSection = document.getElementById("ending");
+    const endingText = document.getElementById("ending-text");
+
+    choices.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-choice]");
+      if (!button) {
+        return;
+      }
+
+      const choice = button.getAttribute("data-choice");
+      endingText.textContent = endings[choice];
+      choices.classList.add("hidden");
+      endingSection.classList.remove("hidden");
+    });
+  </script>
 </body>
 </html>
