@@ -9,6 +9,7 @@
 <body>
   <main class="game">
     <h1>KÁROJ'S GREATEST ADVENTURE</h1>
+    <img id="scene-image" class="scene-image" src="images/start.svg" alt="Kezdo jelenet" />
     <p id="story">
       Te vagy Károj. Egy erdőben ácsorogsz. Kicsit unatkozol, ezért elindulsz kalandozni. Mit teszel?
     </p>
@@ -33,9 +34,16 @@
       "3": "Elutazol egy közeli sítáborba, ám ott rájössz, hogy a síelés buzis, ezért inkább hazamész. Egy férfi a hóban is férfi! (?)"
     };
 
+    const sceneImages = {
+      "1": "images/ending1.svg",
+      "2": "images/ending2.svg",
+      "3": "images/ending3.svg"
+    };
+
     const choices = document.getElementById("choices");
     const endingSection = document.getElementById("ending");
     const endingText = document.getElementById("ending-text");
+    const sceneImage = document.getElementById("scene-image");
 
     choices.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-choice]");
@@ -45,6 +53,8 @@
 
       const choice = button.getAttribute("data-choice");
       endingText.textContent = endings[choice];
+      sceneImage.src = sceneImages[choice];
+      sceneImage.alt = "Vegkifejlet jelenet " + choice;
       choices.classList.add("hidden");
       endingSection.classList.remove("hidden");
     });
